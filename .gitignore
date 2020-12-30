@@ -1,5 +1,5 @@
 # ignore the build directory
-/build*
+/software/build*
 
 # ignore VS code
 .vscode
