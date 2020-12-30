@@ -5,9 +5,9 @@
 * Copyright (c) 2020 Bolder Flight Systems
 */
 
-#include "flight/airdata.h"
+#include "flight/gnss.h"
 
-namespace airdata {
+namespace gnss {
 namespace {
 
 }  // anonymous
@@ -16,8 +16,8 @@ void Init() {
 
 }
 
-void Read(Airdata *ptr) {
+void Read(GnssData *ptr) {
 
 }
 
-}  // namespace airdata
+}  // namespace gnss

@@ -26,7 +26,7 @@ void Begin()
 void DeviceInfo()
 {
   MSG_BUS.println ("---------Bolder Flight Systems---------");
-  MSG_BUS.println ("Flight Software");
+  MSG_BUS.println ("SPAARO Flight Software");
   MSG_BUS.print   ("Version: ");
   MSG_BUS.print(MAJOR_VERSION);
   MSG_BUS.print(".");

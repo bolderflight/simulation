@@ -5,9 +5,9 @@
 * Copyright (c) 2020 Bolder Flight Systems
 */
 
-#include "flight/airdata.h"
+#include "flight/imu.h"
 
-namespace airdata {
+namespace imu {
 namespace {
 
 }  // anonymous
@@ -16,8 +16,8 @@ void Init() {
 
 }
 
-void Read(Airdata *ptr) {
+void Read(ImuData *ptr) {
 
 }
 
-}  // namespace airdata
+}  // namespace imu

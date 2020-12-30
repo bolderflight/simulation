@@ -8,105 +8,101 @@
 #ifndef INCLUDE_FLIGHT_GLOBAL_DEFS_H_
 #define INCLUDE_FLIGHT_GLOBAL_DEFS_H_
 
-#include "flight/hardware_defs.h"
-#include "Eigen/Core"
-#include "Eigen/Dense"
-#include <array>
+#include <cinttypes>
 
-/* Inceptor data */
-struct InceptorData {
-  std::array<uint16_t, 16> cmds;
-};
-/* IMU data */
+/* 6DoF IMU data */
 struct ImuData {
-  Eigen::Vector3f accel_mps2;
-  Eigen::Vector3f gyro_radps;
-  Eigen::Vector3f mag_ut;
-  float die_temp_c;
+  float accel_x_mps2;
+  float accel_y_mps2;
+  float accel_z_mps2;
+  float gyro_x_radps;
+  float gyro_y_radps;
+  float gyro_z_radps;
 };
+
+/* Magnetometer data */
+struct MagData {
+  float mag_x_ut;
+  float mag_y_ut;
+  float mag_z_ut;
+};
+
+/* Airdata */
+struct Airdata {
+  float static_pres_pa;
+  float diff_pres_pa;
+};
+
 /* GNSS data */
 struct GnssData {
-  bool updated;
-  int16_t year;
-  int8_t month;
-  int8_t day;
-  int8_t hour;
-  int8_t min;
-  float sec;
-  uint8_t fix;
-  uint8_t num_satellites;
-  Eigen::Vector3f ned_vel_mps;
-  Eigen::Vector3d lla_msl_rad_m;
+  int8_t fix;
+  int8_t num_sats;
+  int16_t week;
   float alt_wgs84_m;
-  float ground_speed_mps;
-  float ground_track_rad;
-  uint32_t time_accuracy_ns;
-  float horiz_accuracy_m;
-  float vert_accuracy_m;
-  float vel_accuracy_mps;
-  float track_accuracy_rad;
+  float ned_vel_x_mps;
+  float ned_vel_y_mps;
+  float ned_vel_z_mps;
+  float horz_acc_m;
+  float vert_acc_m;
+  float vel_acc_mps;
+  double lat_rad;
+  double lon_rad;
+  double tow_s;
 };
-/* EKF data */
-struct EkfData {
-  Eigen::Vector3f accel_bias_mps2;
-  Eigen::Vector3f gyro_bias_radps;
-  Eigen::Vector3f accel_mps2;
-  Eigen::Vector3f gyro_radps;
-  Eigen::Vector3f ned_vel_mps;
-  Eigen::Vector3d lla_rad_m;
+
+/* Sensor data */
+struct SensorData {
+  ImuData imu;
+  MagData mag;
+  GnssData gnss;
+  Airdata airdata;
+};
+
+/* Pilot inputs */
+struct InceptorData {
+  int8_t mode0;
+  int8_t mode1;
+  int8_t mode2;
+  bool throttle_en;
+  float throttle;
+  float pitch;
+  float roll;
+  float yaw;
+};
+
+/* Sensor processing data */
+struct SenProcData {
+  float accel_x_mps2;
+  float accel_y_mps2;
+  float accel_z_mps2;
+  float gyro_x_radps;
+  float gyro_y_radps;
+  float gyro_z_radps;
   float pitch_rad;
   float roll_rad;
   float yaw_rad;
+  float alt_wgs84_m;
+  float alt_pres_m;
+  float ned_vel_x_mps;
+  float ned_vel_y_mps;
+  float ned_vel_z_mps;
+  double latitude_rad;
+  double longitude_rad;
 };
-/* INS data */
-struct InsData {
-  ImuData imu;
-  GnssData gnss;
-  EkfData ekf;
-};
-/* Presssure transducer data */
-struct PressureTransducerData {
-  float press_pa;
-  float die_temp_c;
-};
-/* Airdata */
-struct Airdata {
-  #ifdef HAVE_PITOT_STATIC
-  PressureTransducerData fmu_static_press;
-  PressureTransducerData diff_press;
-  float filt_diff_press_pa;
-  float ias_mps;
-  float eas_mps;
-  #endif
-  PressureTransducerData static_press;
-  float filt_static_press_pa;
-  float press_alt_m;
-  float agl_alt_m;
-};
-/* Status data */
-struct StatusData {
-  float input_voltage;
-  float regulated_voltage;
-  float pwm_voltage;
-  float sbus_voltage;
-};
-/* Effector Commands */
+
+/* Effector commands */
 struct EffectorCmds {
-  std::array<uint16_t, NUM_PWM_PINS> pwm;
-  std::array<uint16_t, 16> sbus;
+  float pwm[8];
+  float sbus[16];
 };
-/* Controls data */
-struct ControlsData {
-  EffectorCmds cmds;
-};
+
 /* Aircraft data */
 struct AircraftData {
-  double time_s;
   InceptorData inceptor;
-  InsData ins;
-  Airdata airdata;
-  StatusData status;
-  ControlsData control;
+  SensorData sensor;
+  SenProcData sen_proc;
+  EffectorCmds effector;
+  float aux[24];
 };
 
 #endif  // INCLUDE_FLIGHT_GLOBAL_DEFS_H_

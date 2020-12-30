@@ -5,8 +5,8 @@ set(MCU MK66FX1M0)
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_SOURCE_DIR}/cmake/cortex.cmake")
 # Project information
 project(Flight
-	VERSION 1.1.0
-	DESCRIPTION "Flight software skeleton"
+	VERSION 0.1.0
+	DESCRIPTION "SPAARO"
 	LANGUAGES C CXX
 )
 # Grab the processor and set up definitions and compile options
@@ -24,13 +24,6 @@ add_definitions(
 add_definitions(
 	-DSERIAL4_TX_BUFFER_SIZE=2048
 )
-# nanopb
-set(NANOPB_SRC_ROOT_FOLDER "/usr/local/nanopb")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${NANOPB_SRC_ROOT_FOLDER}/extra)
-find_package(Nanopb REQUIRED)
-include_directories(${NANOPB_INCLUDE_DIRS})
-NANOPB_GENERATE_CPP(PROTO_SRCS PROTO_HDRS flight/datalog.proto)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
 # Fetch dependencies
 include(FetchContent)
 FetchContent_Declare(
@@ -39,116 +32,13 @@ FetchContent_Declare(
 	GIT_TAG v1.0.3
 )
 FetchContent_MakeAvailable(core)
-FetchContent_Declare(
-	eigen
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/eigen.git
-	GIT_TAG v1.0.0
-)
-FetchContent_MakeAvailable(eigen)
-FetchContent_Declare(
-	mpu9250
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/mpu9250.git
-	GIT_TAG v1.0.2
-)
-FetchContent_MakeAvailable(mpu9250)
-FetchContent_Declare(
-	bme280
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/bme280.git
-	GIT_TAG v1.0.4
-)
-FetchContent_MakeAvailable(bme280)
-FetchContent_Declare(
-	ublox
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/ublox.git
-	GIT_TAG v1.2.2
-)
-FetchContent_MakeAvailable(ublox)
-FetchContent_Declare(
-	navigation
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/navigation.git
-	GIT_TAG v1.2.3
-)
-FetchContent_MakeAvailable(navigation)
-FetchContent_Declare(
-	ams5915
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/ams5915.git
-	GIT_TAG v1.0.2
-)
-FetchContent_MakeAvailable(ams5915)
-FetchContent_Declare(
-	airdata
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/airdata.git
-	GIT_TAG v1.0.2
-)
-FetchContent_MakeAvailable(airdata)
-FetchContent_Declare(
-	filter
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/filter.git
-	GIT_TAG v1.0.2
-)
-FetchContent_MakeAvailable(filter)
-FetchContent_Declare(
-	statistics
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/statistics.git
-	GIT_TAG v2.0.0
-)
-FetchContent_MakeAvailable(statistics)
-FetchContent_Declare(
-	sbus
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/sbus.git
-	GIT_TAG v1.0.3
-)
-FetchContent_MakeAvailable(sbus)
-FetchContent_Declare(
-	polytools
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/polytools.git
-	GIT_TAG v1.0.3
-)
-FetchContent_MakeAvailable(polytools)
-FetchContent_Declare(
-	pwm
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/pwm.git
-	GIT_TAG v1.0.3
-)
-FetchContent_MakeAvailable(pwm)
-FetchContent_Declare(
-	actuator
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/actuator.git
-	GIT_TAG v1.0.2
-)
-FetchContent_MakeAvailable(actuator)
-FetchContent_Declare(
-	logger
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/logger.git
-	GIT_TAG v1.0.3
-)
-FetchContent_MakeAvailable(logger)
-FetchContent_Declare(
-	framing
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/framing.git
-	GIT_TAG v1.1.2
-)
-FetchContent_MakeAvailable(framing)
-FetchContent_Declare(
-	mavlink
-	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/mavlink.git
-	GIT_TAG v1.0.3
-)
-FetchContent_MakeAvailable(mavlink)
 # Add the executable
 add_executable(flight
 	flight/flight.cc
 	flight/print_msg.cc
-	flight/inceptor.cc
-	flight/ins.cc
 	flight/airdata.cc
-	flight/control.cc
-	flight/effector.cc
-	flight/status.cc
-	flight/datalog.cc
-	flight/telemetry.cc
-	${PROTO_SRCS}
-	${PROTO_HDRS}
+	flight/imu.cc
+	flight/gnss.cc
 )
 # Add the includes
 target_include_directories(flight PUBLIC 
@@ -159,22 +49,6 @@ target_include_directories(flight PUBLIC
 target_link_libraries(flight
 	PRIVATE 
 		core
-		eigen
-		mpu9250
-		bme280
-		ublox
-		navigation
-		ams5915
-		airdata
-		filter
-		statistics
-		sbus
-		polytools
-		pwm
-		actuator
-		logger
-		framing
-		mavlink
 )
 # Add hex and upload targets
 include(${CMAKE_SOURCE_DIR}/cmake/flash_mcu.cmake)
