@@ -10,7 +10,7 @@
 
 #include "core/core.h"
 // #include "ams5915/ams5915.h"
-// #include <array>
+#include <array>
 
 /*
 * This define sets whether the aircraft has a pitot-static system
@@ -27,14 +27,14 @@ static constexpr unsigned int MINOR_VERSION = 1;
 static constexpr unsigned int FIX_VERSION = 0;
 /* Messages */    
 static constexpr usb_serial_class &MSG_BUS = Serial;
-// /* Frame rate */
-// static constexpr int FRAME_RATE_HZ = 50;
-// static constexpr float FRAME_PERIOD_S = 1.0f / FRAME_RATE_HZ;
-// /* Inceptor / Effector */
-// static constexpr HardwareSerial &SBUS_UART = Serial2;
-// static constexpr int NUM_PWM_PINS = 8;
-// static constexpr std::array<int, NUM_PWM_PINS> PWM_PINS = {21, 22, 23, 2, 3, 4, 5, 6};
-// static constexpr float EFFECTOR_DELAY_US = FRAME_PERIOD_S * 0.9f * 1e6; // 90% of the frame period
+/* Frame rate */
+static constexpr int FRAME_RATE_HZ = 50;
+static constexpr float FRAME_PERIOD_S = 1.0f / FRAME_RATE_HZ;
+/* Inceptor / Effector */
+static constexpr HardwareSerial &SBUS_UART = Serial2;
+static constexpr int NUM_PWM_PINS = 8;
+static constexpr std::array<int, NUM_PWM_PINS> PWM_PINS = {21, 22, 23, 2, 3, 4, 5, 6};
+static constexpr float EFFECTOR_DELAY_US = FRAME_PERIOD_S * 0.9f * 1e6; // 90% of the frame period
 // /* IMU */
 // static constexpr SPIClass &IMU_SPI_BUS = SPI;
 // static constexpr unsigned int IMU_CS = 24;

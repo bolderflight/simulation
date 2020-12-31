@@ -9,6 +9,7 @@
 #define INCLUDE_FLIGHT_GLOBAL_DEFS_H_
 
 #include <cinttypes>
+#include "flight/hardware_defs.h"
 
 /* 6DoF IMU data */
 struct ImuData {
@@ -52,6 +53,7 @@ struct GnssData {
 
 /* Sensor data */
 struct SensorData {
+  double sys_time_s;
   ImuData imu;
   MagData mag;
   GnssData gnss;
@@ -92,8 +94,8 @@ struct SenProcData {
 
 /* Effector commands */
 struct EffectorCmds {
-  float pwm[8];
-  float sbus[16];
+  std::array<uint16_t, NUM_PWM_PINS> pwm;
+  std::array<uint16_t, 16> sbus;
 };
 
 /* Aircraft data */

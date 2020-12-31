@@ -32,13 +32,27 @@ FetchContent_Declare(
 	GIT_TAG v1.0.3
 )
 FetchContent_MakeAvailable(core)
+FetchContent_Declare(
+	sbus
+	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/sbus.git
+	GIT_TAG v1.0.3
+)
+FetchContent_MakeAvailable(sbus)
+FetchContent_Declare(
+	pwm
+	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/pwm.git
+	GIT_TAG v1.0.3
+)
+FetchContent_MakeAvailable(pwm)
 # Add the executable
 add_executable(flight
 	flight/flight.cc
 	flight/print_msg.cc
+	flight/inceptor.cc
 	flight/airdata.cc
 	flight/imu.cc
 	flight/gnss.cc
+	flight/effector.cc
 )
 # Add the includes
 target_include_directories(flight PUBLIC 
@@ -49,6 +63,8 @@ target_include_directories(flight PUBLIC
 target_link_libraries(flight
 	PRIVATE 
 		core
+		sbus
+		pwm
 )
 # Add hex and upload targets
 include(${CMAKE_SOURCE_DIR}/cmake/flash_mcu.cmake)

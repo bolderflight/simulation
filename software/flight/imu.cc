@@ -16,6 +16,10 @@ void Init() {
 
 }
 
+void AttachCallback(void (*function)()) {
+  
+}
+
 void Read(ImuData *ptr) {
 
 }
