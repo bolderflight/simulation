@@ -42,6 +42,32 @@ void Read(InceptorData *ptr) {
     ptr->roll = polytools::polyval(ATT_CMD_POLY_COEF_, static_cast<float>(sbus_data[1]));
     ptr->pitch = polytools::polyval(ATT_CMD_POLY_COEF_, static_cast<float>(sbus_data[2]));
     ptr->yaw = polytools::polyval(ATT_CMD_POLY_COEF_, static_cast<float>(sbus_data[3]));
+    /* Mode0 */
+    if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[4])) < 0.3f) {
+      ptr->mode0 = 2;
+    } else if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[4])) < 0.6f) {
+      ptr->mode0 = 1;
+    } else {
+      ptr->mode0 = 0;
+    }
+    /* Mode1 */
+    if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[5])) < 0.3f) {
+      ptr->mode1 = 2;
+    } else if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[5])) < 0.6f) {
+      ptr->mode1 = 1;
+    } else {
+      ptr->mode1 = 0;
+    }
+    /* Mode2 */
+    if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[6])) < 0.3f) {
+      ptr->mode2 = 2;
+    } else if (polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[6])) < 0.6f) {
+      ptr->mode2 = 1;
+    } else {
+      ptr->mode2 = 0;
+    }
+    /* Throttle safety */
+    ptr->throttle_en = polytools::polyval(MODE_POLY_COEF_, static_cast<float>(sbus_data[7])) > 0.5f;
   }
 }
 
