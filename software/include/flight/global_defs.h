@@ -11,7 +11,7 @@
 #include <cinttypes>
 #include "flight/hardware_defs.h"
 
-/* 6DoF IMU data */
+/* IMU data */
 struct ImuData {
   float accel_x_mps2;
   float accel_y_mps2;
@@ -19,10 +19,6 @@ struct ImuData {
   float gyro_x_radps;
   float gyro_y_radps;
   float gyro_z_radps;
-};
-
-/* Magnetometer data */
-struct MagData {
   float mag_x_ut;
   float mag_y_ut;
   float mag_z_ut;
@@ -55,7 +51,6 @@ struct GnssData {
 struct SensorData {
   double sys_time_s;
   ImuData imu;
-  MagData mag;
   GnssData gnss;
   Airdata airdata;
 };
@@ -104,7 +99,7 @@ struct AircraftData {
   SensorData sensor;
   SenProcData sen_proc;
   EffectorCmds effector;
-  float aux[24];
+  std::array<float, 24> aux;
 };
 
 #endif  // INCLUDE_FLIGHT_GLOBAL_DEFS_H_

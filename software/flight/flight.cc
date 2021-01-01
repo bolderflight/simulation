@@ -14,6 +14,10 @@
 #include "flight/imu.h"
 #include "flight/gnss.h"
 #include "flight/effector.h"
+#include "flight/datalog.h"
+
+/* Calibration time */
+static constexpr float CAL_TIME_S_ = 10.0f;
 
 /* Aircraft data */
 AircraftData data;
@@ -46,10 +50,7 @@ void drdy() {
   /* Effector commands */
   effector::Cmd(data.effector);
   /* Datalog */
-  // datalog::Write(data);
-
-  /* Telemetry */
-
+  datalog::Write(data);
 }
 
 int main() {
@@ -62,18 +63,25 @@ int main() {
   airdata::Init();
   imu::Init();
   gnss::Init();
+  /* Calibrate sensors */
+  print::Info("Calibrating sensors...");
+  elapsedMillis t_ms = 0;
+  while (t_ms < CAL_TIME_S_ * 1000.0f) {
+    airdata::Calibrate();
+    imu::Calibrate();
+    delay(FRAME_PERIOD_S * 1000.0f);
+  }
+  print::Info("done.\n");
   /* Init VMS */
 
   /* Init effectors */
   effector::Init();
   /* Init datalog */
-  // datalog::Init();
-  /* Init telemetry */
-
+  datalog::Init();
   /* Attach IMU data ready callback */
   imu::AttachCallback(drdy);
   while (1) {
     /* Flush datalog to SD */
-    // datalog::Flush();
+    datalog::Flush();
   }
 }

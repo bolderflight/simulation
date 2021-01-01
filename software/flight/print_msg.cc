@@ -12,7 +12,7 @@
 namespace print {
 
 namespace {
-static constexpr bool DEBUG = false;
+static constexpr bool DEBUG = true;
 } // anonymous
 
 void Begin()

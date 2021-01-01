@@ -13,8 +13,9 @@
 namespace imu {
 
 void Init();
+void Calibrate();
 void AttachCallback(void (*function)());
-void Read(ImuData *ptr);
+void Read(ImuData *imu);
 
 }  // namespace imu
 

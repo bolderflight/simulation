@@ -13,6 +13,7 @@
 namespace airdata {
 
 void Init();
+void Calibrate();
 void Read(Airdata *ptr);
 
 }  // namespace airdata
