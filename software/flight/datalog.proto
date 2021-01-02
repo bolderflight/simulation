@@ -59,15 +59,19 @@ message DatalogMessage {
   float sen_proc_pitch_rad = 40;
   float sen_proc_roll_rad = 41;
   float sen_proc_yaw_rad = 42;
-  float sen_proc_alt_wgs84_m = 43;
-  float sen_proc_alt_pres_m = 44;
-  float sen_proc_ned_vel_x_mps = 45;
-  float sen_proc_ned_vel_y_mps = 46;
-  float sen_proc_ned_vel_z_mps = 47;
-  double sen_proc_latitude_rad = 48;
-  double sen_proc_longitude_rad = 49;
-  repeated float effector_pwm = 50;
-  repeated float effector_sbus = 51;
-  repeated float aux = 52;
+  float sen_proc_static_pres_pa = 43;
+  float sen_proc_diff_pres_pa = 44;
+  float sen_proc_alt_wgs84_m = 45;
+  float sen_proc_alt_pres_m = 46;
+  float sen_proc_ias_mps = 47;
+  float sen_proc_eas_mps = 48;
+  float sen_proc_ned_vel_x_mps = 49;
+  float sen_proc_ned_vel_y_mps = 50;
+  float sen_proc_ned_vel_z_mps = 51;
+  double sen_proc_latitude_rad = 52;
+  double sen_proc_longitude_rad = 53;
+  repeated float effector_pwm = 54;
+  repeated float effector_sbus = 55;
+  repeated float aux = 56;
 }
 

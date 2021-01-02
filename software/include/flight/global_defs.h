@@ -78,8 +78,12 @@ struct SenProcData {
   float pitch_rad;
   float roll_rad;
   float yaw_rad;
+  float static_pres_pa;
+  float diff_pres_pa;
   float alt_wgs84_m;
   float alt_pres_m;
+  float ias_mps;
+  float eas_mps;
   float ned_vel_x_mps;
   float ned_vel_y_mps;
   float ned_vel_z_mps;

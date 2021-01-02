@@ -91,8 +91,12 @@ void Write(const AircraftData &ref) {
   datalog_msg_.sen_proc_pitch_rad = ref.sen_proc.pitch_rad;
   datalog_msg_.sen_proc_roll_rad = ref.sen_proc.roll_rad;
   datalog_msg_.sen_proc_yaw_rad = ref.sen_proc.yaw_rad;
+  datalog_msg_.sen_proc_static_pres_pa = ref.sen_proc.static_pres_pa;
+  datalog_msg_.sen_proc_diff_pres_pa = ref.sen_proc.diff_pres_pa;
   datalog_msg_.sen_proc_alt_wgs84_m = ref.sen_proc.alt_wgs84_m;
   datalog_msg_.sen_proc_alt_pres_m = ref.sen_proc.alt_pres_m;
+  datalog_msg_.sen_proc_ias_mps = ref.sen_proc.ias_mps;
+  datalog_msg_.sen_proc_eas_mps = ref.sen_proc.eas_mps;
   datalog_msg_.sen_proc_ned_vel_x_mps = ref.sen_proc.ned_vel_x_mps;
   datalog_msg_.sen_proc_ned_vel_y_mps = ref.sen_proc.ned_vel_y_mps;
   datalog_msg_.sen_proc_ned_vel_z_mps = ref.sen_proc.ned_vel_z_mps;
