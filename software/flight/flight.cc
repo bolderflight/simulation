@@ -13,6 +13,7 @@
 #include "flight/airdata.h"
 #include "flight/imu.h"
 #include "flight/gnss.h"
+#include "flight/vms.h"
 #include "flight/effector.h"
 #include "flight/datalog.h"
 
@@ -46,7 +47,7 @@ void drdy() {
   imu::Read(&data.sensor.imu);
   gnss::Read(&data.sensor.gnss);
   /* Run the VMS */
-
+  vms::Run(data.inceptor, data.sensor, &data.sen_proc, &data.aux, &data.effector);
   /* Effector commands */
   effector::Cmd(data.effector);
   /* Datalog */
@@ -73,7 +74,7 @@ int main() {
   }
   print::Info("done.\n");
   /* Init VMS */
-
+  vms::Init();
   /* Init effectors */
   effector::Init();
   /* Init datalog */

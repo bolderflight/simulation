@@ -108,8 +108,8 @@ void Write(const AircraftData &ref) {
   for (std::size_t i = 0; i < ref.effector.sbus.size(); i++) {
     datalog_msg_.effector_sbus[i] = ref.effector.sbus[i];
   }
-  for (std::size_t i = 0; i < ref.aux.size(); i++) {
-    datalog_msg_.aux[i] = ref.aux[i];
+  for (std::size_t i = 0; i < ref.aux.data.size(); i++) {
+    datalog_msg_.aux[i] = ref.aux.data[i];
   }
   /* Encode */
   stream_ = pb_ostream_from_buffer(data_buffer_, sizeof(data_buffer_));

@@ -97,13 +97,18 @@ struct EffectorCmds {
   std::array<float, 16> sbus;
 };
 
+/* Aux data */
+struct AuxData {
+  std::array<float, 24> data;
+};
+
 /* Aircraft data */
 struct AircraftData {
   InceptorData inceptor;
   SensorData sensor;
   SenProcData sen_proc;
   EffectorCmds effector;
-  std::array<float, 24> aux;
+  AuxData aux;
 };
 
 #endif  // INCLUDE_FLIGHT_GLOBAL_DEFS_H_

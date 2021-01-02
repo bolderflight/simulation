@@ -103,13 +103,15 @@ add_executable(flight
 	flight/gnss.cc
 	flight/effector.cc
 	flight/datalog.cc
+	flight/vms.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/autocode/NXPCortexM4/${VMS}/autocode_vms.cpp
 	${PROTO_SRCS}
 	${PROTO_HDRS}
 )
 # Add the includes
 target_include_directories(flight PUBLIC 
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-	$<INSTALL_INTERFACE:include>
+	${CMAKE_CURRENT_SOURCE_DIR}/include
+	${CMAKE_CURRENT_SOURCE_DIR}/autocode/NXPCortexM4/${VMS}
 )
 # Link libraries to the executable
 target_link_libraries(flight
