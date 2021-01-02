@@ -42,7 +42,7 @@ FetchContent_MakeAvailable(core)
 FetchContent_Declare(
 	polytools
 	GIT_REPOSITORY 	https://gitlab.com/bolderflight/software/polytools.git
-	GIT_TAG v1.0.3
+	GIT_TAG v1.1.3
 )
 FetchContent_MakeAvailable(polytools)
 FetchContent_Declare(

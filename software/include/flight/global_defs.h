@@ -89,8 +89,8 @@ struct SenProcData {
 
 /* Effector commands */
 struct EffectorCmds {
-  std::array<uint16_t, NUM_PWM_PINS> pwm;
-  std::array<uint16_t, 16> sbus;
+  std::array<float, NUM_PWM_PINS> pwm;
+  std::array<float, 16> sbus;
 };
 
 /* Aircraft data */
