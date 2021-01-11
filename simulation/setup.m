@@ -49,6 +49,7 @@ fh_prop = str2func(prop);
 fh_prop();
 
 %% Trim
+trim();
 
 %% Cleanup
 clear vehicle sensor actuator motor prop fh_vehicle fh_sensor fh_act ...
