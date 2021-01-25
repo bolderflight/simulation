@@ -1,4 +1,4 @@
-% Configures and starts simulation
+% Configures and trims simulation
 %
 % Brian R Taylor
 % brian.taylor@bolderflight.com
@@ -12,26 +12,16 @@ close all;
 clear all;
 clc;
 
-%% Target trim conditions
-
-
-%% Definitions
-% Vehicle
-vehicle = 'UltraStick25e';
-% Sensors
-sensor = 'FmuR_v1';
-% Actuators
-actuator = 'empty';
-% Motor
-motor = 'empty';
-% Propeller
-prop = 'empty';
+%% Configure
+config();
 
 %% Add paths
-addpath(genpath('vms'));
-addpath(genpath('sensor_processing'));
+addpath(genpath('aircraft'));
+addpath(genpath('libraries'));
+addpath(genpath('matlab'));
 addpath(genpath('models'));
-addpath(genpath('defs'));
+addpath(genpath('sensor_processing'));
+addpath(genpath('vms'));
 
 %% Load bus definitions
 load('bus_defs.mat');
@@ -39,18 +29,9 @@ load('bus_defs.mat');
 %% Call the setup scripts
 fh_vehicle = str2func(vehicle);
 fh_vehicle();
-fh_sensor = str2func(sensor);
-fh_sensor();
-fh_act = str2func(actuator);
-fh_act();
-fh_motor = str2func(motor);
-fh_motor();
-fh_prop = str2func(prop);
-fh_prop();
 
 %% Trim
 trim();
 
 %% Cleanup
-clear vehicle sensor actuator motor prop fh_vehicle fh_sensor fh_act ...
-    fh_motor fh_prop;
+clear vehicle fh_vehicle;
