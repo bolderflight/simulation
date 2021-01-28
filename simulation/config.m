@@ -19,7 +19,7 @@ Target.airspeed_mps = 17;
 Env.terrain_alt_msl_m = 0;
 
 %% Flight software frame rate
-frameRate_hz = 100;
+frameRate_hz = 50;
 framePeriod_s = 1/frameRate_hz;
 
 %% Definitions

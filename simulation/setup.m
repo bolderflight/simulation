@@ -21,6 +21,7 @@ addpath(genpath('libraries'));
 addpath(genpath('matlab'));
 addpath(genpath('models'));
 addpath(genpath('sensor_processing'));
+addpath(genpath('sfun'));
 addpath(genpath('vms'));
 
 %% Load bus definitions
